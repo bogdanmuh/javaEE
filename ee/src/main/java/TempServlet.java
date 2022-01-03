@@ -14,41 +14,19 @@ import java.util.Map;
 public class TempServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-   /*     String one = req.getParameter("one");
-        String two = req.getParameter("two");
-        //url параметры
-        //Для нескольких одиннаковых параметров
-        String[] ones = req.getParameterValues("one");
-        for (String s : ones){
-            System.out.println(s);
+        Enumeration<String> headerNames = req.getHeaderNames();
+        while(headerNames.hasMoreElements()){
+            String s = headerNames.nextElement();
+            System.out.println(s+"="+req.getHeader(s));
         }
-        Enumeration<String> parameterNames = req.getParameterNames();
-        while (parameterNames.hasMoreElements()){
-            String elementName = parameterNames.nextElement();
-            System.out.println(elementName+"="+req.getParameter(parameterNames.nextElement()));
-        }//параметры  и значения
-        Map<String, String[]> parameterMap = req.getParameterMap();
-        System.out.println(req.getRequestURL());
+        System.out.println(req.getAuthType());
+        System.out.println(req.getContentLength());
+        System.out.println(req.getContentType());
+        System.out.println(req.getMethod());
         System.out.println(req.getRequestURI());
-        System.out.println(req.getServletPath());
-        System.out.println(req.getRemoteHost());
+        System.out.println(req.getQueryString());
+        System.out.println(req.getProtocol());
 
-        System.out.println(req.getLocalPort());
-        System.out.println(req.getRequestURI());
-        System.out.println(req.getQueryString());// url запрос подходит для того чтобы распарсить
-       */ // это для get запросов
-        String one = req.getParameter("one");
-        one = one==null?"":one.replaceAll("<","&lt;").replaceAll(">","&gt;");// защита от xss атак 
-        resp.getWriter().write("<html>"+
-                "<head></head>"+
-                "<body>"+
-                "one="+one+
-                "<form action = 'temp' method ='post'>"+
-                "<textarea name='one'></textarea>"+
-                "<input type = 'submit' name='submit'/>"+
-                "</form>"+
-                "</body>"+
-                "</html>");
     }
 
     @Override
