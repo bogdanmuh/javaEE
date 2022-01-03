@@ -4,8 +4,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 //ctrl+alt+v горячие клавиша для объявления переменной возвращаемого методом
 //ctrl+w выделить строку
@@ -14,18 +16,12 @@ import java.util.Map;
 public class TempServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Enumeration<String> headerNames = req.getHeaderNames();
-        while(headerNames.hasMoreElements()){
-            String s = headerNames.nextElement();
-            System.out.println(s+"="+req.getHeader(s));
+       // gzip инструмент предоставляющий возможность уменьшить размер html страницы
+        if(req.getHeader("Accept-Encoding").contains("gzio")){
+            PrintWriter printWriter = new PrintWriter(new GZIPOutputStream(resp.getOutputStream()));
+            printWriter.write("Hello world");
         }
-        System.out.println(req.getAuthType());
-        System.out.println(req.getContentLength());
-        System.out.println(req.getContentType());
-        System.out.println(req.getMethod());
-        System.out.println(req.getRequestURI());
-        System.out.println(req.getQueryString());
-        System.out.println(req.getProtocol());
+
 
     }
 
