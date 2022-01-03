@@ -38,16 +38,13 @@ public class TempServlet extends HttpServlet {
         System.out.println(req.getQueryString());// url запрос подходит для того чтобы распарсить
        */ // это для get запросов
         String one = req.getParameter("one");
-        String two = req.getParameter("two");
+        one = one==null?"":one.replaceAll("<","&lt;").replaceAll(">","&gt;");// защита от xss атак 
         resp.getWriter().write("<html>"+
                 "<head></head>"+
                 "<body>"+
                 "one="+one+
-                "two="+two+
-
                 "<form action = 'temp' method ='post'>"+
-                "<input type = 'text' name='one'/>"+
-                "<input type = 'text' name='two'/>"+
+                "<textarea name='one'></textarea>"+
                 "<input type = 'submit' name='submit'/>"+
                 "</form>"+
                 "</body>"+
