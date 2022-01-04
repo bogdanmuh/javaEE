@@ -1,9 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -17,19 +14,17 @@ import java.util.zip.GZIPOutputStream;
 public class TempServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
-        for(Cookie cookie:cookies){
-            System.out.println(cookie.getName());
-            System.out.println(cookie.getValue());
+        // на сервере есть сессии, а на клиенте есть куки
+
+        HttpSession session = req.getSession();
+        Enumeration<String> attributeNames = session.getAttributeNames();
+        while(attributeNames.hasMoreElements()){
+            String attributeName = attributeNames.nextElement();
+            System.out.println(attributeName+"="+session.getAttribute(attributeName));
         }
-        Cookie cookie= new Cookie("testCookei","abc");
-
-        cookie.setMaxAge(5);// в течение 5 секунд браузер удалит куки
-        cookie.setPath("/temp.html");// только для этого пути будет доступны куки
-        //cookie.setDomain();
-        cookie.setSecure(true);// куки будут видны если будет только https соединение
-        resp.addCookie(cookie);
-
+        session.setAttribute("one","two");
+        System.out.println(session.getMaxInactiveInterval());//сессия существует ограниченное время
+        
 
 
     }
