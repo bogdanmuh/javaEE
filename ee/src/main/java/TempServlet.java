@@ -1,5 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +17,19 @@ import java.util.zip.GZIPOutputStream;
 public class TempServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       // gzip инструмент предоставляющий возможность уменьшить размер html страницы
-        if(req.getHeader("Accept-Encoding").contains("gzio")){
-            PrintWriter printWriter = new PrintWriter(new GZIPOutputStream(resp.getOutputStream()));
-            printWriter.write("Hello world");
+        Cookie[] cookies = req.getCookies();
+        for(Cookie cookie:cookies){
+            System.out.println(cookie.getName());
+            System.out.println(cookie.getValue());
         }
+        Cookie cookie= new Cookie("testCookei","abc");
+
+        cookie.setMaxAge(5);// в течение 5 секунд браузер удалит куки
+        cookie.setPath("/temp.html");// только для этого пути будет доступны куки
+        //cookie.setDomain();
+        cookie.setSecure(true);// куки будут видны если будет только https соединение
+        resp.addCookie(cookie);
+
 
 
     }
