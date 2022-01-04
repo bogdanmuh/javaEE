@@ -24,7 +24,7 @@ public class TempServlet extends HttpServlet {
         }
         session.setAttribute("one","two");
         System.out.println(session.getMaxInactiveInterval());//сессия существует ограниченное время
-        
+
 
 
     }
