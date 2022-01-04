@@ -10,6 +10,7 @@ import java.util.zip.GZIPOutputStream;
 //ctrl+alt+v горячие клавиша для объявления переменной возвращаемого методом
 //ctrl+w выделить строку
 //ctrl+shift+/ закомментировать выделенное
+//alt + insert генерация конструктора
 @WebServlet("/temp")
 public class TempServlet extends HttpServlet {
     @Override
