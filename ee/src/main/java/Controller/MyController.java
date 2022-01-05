@@ -1,7 +1,7 @@
 package Controller;
 
 import MyModel.MyModel;
-import jsp.Person;
+import jsp.Student;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,10 +16,10 @@ public class MyController extends HttpServlet {
     MyModel myModel = new MyModel();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Person person = myModel.getPerson();
-        req.setAttribute("Person",person);   // при компиляции jsp переходит в servlet и три это варианты объясняю как зависит будущий созданный Servlet от scope
-        req.getSession().setAttribute("Person",person);
-        req.getServletContext().setAttribute("Person",person);
+        Student student = myModel.getStudent();
+        req.setAttribute("Student",student);   // при компиляции jsp переходит в servlet и три это варианты объясняю как зависит будущий созданный Servlet от scope
+        req.getSession().setAttribute("Student",student);
+        req.getServletContext().setAttribute("Student",student);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/Myview.jsp");
         requestDispatcher.forward(req,resp);
     }

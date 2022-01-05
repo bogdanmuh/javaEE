@@ -11,9 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-    <jsp:useBean id="Person" class = "jsp.Person" scope="request"/>
+    <jsp:useBean id="Student" class = "jsp.Student" scope="request"/>
     <%-- <jsp:useBean id="person" class = "jsp.Person" scope="session"/>
     <jsp:useBean id="person" class = "jsp.Person" scope="application"/>--%>
-    <jsp:getProperty name="Person" property="name"/>
+    <jsp:getProperty name="Student" property="name"/>
 </body>
 </html>

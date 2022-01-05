@@ -1,10 +1,10 @@
 package MyModel;
 
-import jsp.Person;
+import jsp.Student;
 
 public class MyModel {
-    public Person getPerson(){
-        Person person = new Person();
+    public Student getStudent(){
+        Student person = new Student();
         //..
         person.setName("Max");
         person.setAge(22);
